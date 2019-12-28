@@ -177,7 +177,7 @@
                             <form action="{{route('review.store')}}" method="POST">
                                 {{csrf_field()}}
                                 <input type="hidden" value="{{$detail_product->id}}" name="product_id">
-                                <textarea name="review" required></textarea>
+                                <textarea name="review"></textarea>
                                 <b>Rating: </b>  @include('frontEnd._product_rating')
                                 <button type="submit" class="btn btn-default pull-right">
                                     Submit
