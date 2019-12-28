@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>@yield('title','Master Page')</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link href="{{asset('frontEnd/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('frontEnd/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('frontEnd/css/prettyPhoto.css')}}" rel="stylesheet">
@@ -18,6 +19,8 @@
     <script src="{{asset('frontEnd/js/respond.min.js')}}"></script>
     <![endif]-->
     <link rel="stylesheet" href="{{asset('easyzoom/css/easyzoom.css')}}" />
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
 </head><!--/head-->
 
 <body>
@@ -65,5 +68,6 @@
         }
     });
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </body>
 </html>

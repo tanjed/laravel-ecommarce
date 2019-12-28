@@ -16,4 +16,8 @@ class Products_model extends Model
     public function attributes(){
         return $this->hasMany(ProductAtrr_model::class,'products_id','id');
     }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class,'product_id');
+    }
 }
