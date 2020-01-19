@@ -195,26 +195,32 @@
 
             <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-                    <?php $countChunk=0;?>
-                    @foreach($relateProducts->chunk(3) as $chunk)
-                        <?php $countChunk++; ?>
-                        <div class="item<?php if($countChunk==1){ echo' active';} ?>">
-                            @foreach($chunk as $item)
+<!--                    -->
+{{--                    @foreach($relateProducts->chunk(3) as $chunk)--}}
+<!--                        -->
+
+                            <div>
+                                @foreach($recommanded_products as $item)
                                 <div class="col-sm-4">
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{{url('/products/small',$item->image)}}" alt="" style="width: 150px;"/>
-                                                <h2>{{$item->price}}</h2>
-                                                <p>{{$item->p_name}}</p>
+{{--                                                <img src="{{url('/products/small',$item->image)}}" alt="" style="width: 150px;"/>--}}
+{{--                                                <h2>{{$item->price}}</h2>--}}
+{{--                                                <p>{{$item->p_name}}</p>--}}
+                                                <img src="{{url('/products/small',$item['products']['image'])}}" alt="" style="width: 150px;"/>
+                                                <h2>{{$item['products']['price']}}</h2>
+                                                <p>{{$item['products']['p_name']}}</p>
                                                 <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
-                            @endforeach
+                                @endforeach
+{{--                            @endforeach--}}
                         </div>
-                    @endforeach
+{{--                    @endforeach--}}
                 </div>
                 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
                     <i class="fa fa-angle-left"></i>

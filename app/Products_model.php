@@ -20,4 +20,8 @@ class Products_model extends Model
     {
         return $this->hasMany(Review::class,'product_id');
     }
+    public function views()
+    {
+        return $this->hasOne(ProductViews::class);
+    }
 }

@@ -6,6 +6,7 @@ use App\Category_model;
 use App\ImageGallery_model;
 use App\ProductAtrr_model;
 use App\Products_model;
+use App\ProductViews;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -29,7 +30,16 @@ class IndexController extends Controller
         $imagesGalleries=ImageGallery_model::where('products_id',$id)->get();
         $totalStock=ProductAtrr_model::where('products_id',$id)->sum('stock');
         $relateProducts=Products_model::where([['id','!=',$id],['categories_id',$detail_product->categories_id]])->get();
-        return view('frontEnd.product_details',compact('detail_product','imagesGalleries','totalStock','relateProducts'));
+
+        $views = ProductViews::where('product_id',$id)->first();
+        if (count((array)$views) == 0){
+            ProductViews::create(['product_id'=>$id, 'hit'=>1]);
+        }else{
+            $views->update(['hit' => ($views->hit+1)]);
+        }
+
+        $recommanded_products = ProductViews::with('products')->orderBy('hit','desc')->take(3)->get()->toArray();
+        return view('frontEnd.product_details',compact('detail_product','imagesGalleries','totalStock','relateProducts','recommanded_products'));
     }
     public function getAttrs(Request $request){
         $all_attrs=$request->all();
