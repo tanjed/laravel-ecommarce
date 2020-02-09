@@ -22,6 +22,8 @@ class OrdersController extends Controller
         return view('checkout.review_order',compact('shipping_address','cart_datas','total_price'));
     }
     public function order(Request $request){
+        $session_id=Session::get('session_id');
+        Cart_model::where('session_id',$session_id)->delete();
         $input_data=$request->all();
         $payment_method=$input_data['payment_method'];
         Orders_model::create($input_data);

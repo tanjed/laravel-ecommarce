@@ -31,8 +31,11 @@ Route::post('/register_user','UsersController@register');
 Route::post('/user_login','UsersController@login');
 Route::get('/logout','UsersController@logout');
 
+Route::get('/search','SearchController@execute')->name('search');
+
 ////// User Authentications ///////////
 Route::group(['middleware'=>'FrontLogin_middleware'],function (){
+
     Route::get('/myaccount','UsersController@account');
     Route::put('/update-profile/{id}','UsersController@updateprofile');
     Route::put('/update-password/{id}','UsersController@updatepassword');

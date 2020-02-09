@@ -35,6 +35,24 @@
                         @endforeach
                     </div><!--features_items-->
 
+                    <div class="features_items"><!--features_items-->
+                        <h2 class="title text-center">Recommended Items</h2>
+                        @foreach($recommended_products as $item)
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <a href="{{url('/product-detail',$item->products->id)}}"><img src="{{url('products/small/',$item->products->image)}}" alt="" /></a>
+                                            <h2>$ {{$item->products->price}}</h2>
+                                            <p>{{$item->products->p_name}}</p>
+                                            <a href="{{url('/product-detail',$item->products->id)}}" class="btn btn-default add-to-cart">View Product</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div><!--features_items-->
+
                 </div>
             </div>
         </div>

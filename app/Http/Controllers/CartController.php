@@ -47,7 +47,7 @@ class CartController extends Controller
                     return back()->with('message','This Item Added already');
                 }else{
                     Cart_model::create($inputToCart);
-                    return back()->with('message','Add To Cart Already');
+                    return back()->with('message','Item Added To Cart');
                 }
             }else{
                 return back()->with('message','Stock is not Available!');

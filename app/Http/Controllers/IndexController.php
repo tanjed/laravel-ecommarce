@@ -7,13 +7,24 @@ use App\ImageGallery_model;
 use App\ProductAtrr_model;
 use App\Products_model;
 use App\ProductViews;
+use App\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
     public function index(){
+        $recommended_products = ProductViews::with('products')
+            ->withCount(['reviews as avg_reviews' => function ($query) {
+                return $query->select(DB::raw('avg(ratting)'));
+            }])
+            ->orderBy('hit', 'desc')
+            ->orderBy('avg_reviews', 'desc')
+            ->limit(5)
+            ->get();
+
         $products=Products_model::all();
-        return view('frontEnd.index',compact('products'));
+        return view('frontEnd.index',compact('products','recommended_products'));
     }
     public function shop(){
         $products=Products_model::all();
@@ -30,6 +41,8 @@ class IndexController extends Controller
         $imagesGalleries=ImageGallery_model::where('products_id',$id)->get();
         $totalStock=ProductAtrr_model::where('products_id',$id)->sum('stock');
         $relateProducts=Products_model::where([['id','!=',$id],['categories_id',$detail_product->categories_id]])->get();
+        $avg_ratting = Review::where('product_id',$id)->avg('ratting');
+
 
         $views = ProductViews::where('product_id',$id)->first();
         if (count((array)$views) == 0){
@@ -39,7 +52,7 @@ class IndexController extends Controller
         }
 
         $recommanded_products = ProductViews::with('products')->orderBy('hit','desc')->take(3)->get()->toArray();
-        return view('frontEnd.product_details',compact('detail_product','imagesGalleries','totalStock','relateProducts','recommanded_products'));
+        return view('frontEnd.product_details',compact('detail_product','imagesGalleries','totalStock','relateProducts','recommanded_products','avg_ratting'));
     }
     public function getAttrs(Request $request){
         $all_attrs=$request->all();

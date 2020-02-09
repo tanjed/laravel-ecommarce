@@ -54,6 +54,17 @@
                         </select>
                         </span><br>
                         <span>
+                            <div>
+                                @for($i = 1; $i<=5; $i++)
+                                    @if($i <= (int)$avg_ratting)
+                                        <i class="fa fa-star fa-2x" style="color: green" data-index="1"></i>
+                                    @else
+                                        <i class="fa fa-star fa-2x" style="color: gray" data-index="1"></i>
+                                    @endif
+                                @endfor
+                            </div>
+                        </span>
+                        <span>
                             <span id="dynamic_price">US ${{$detail_product->price}}</span>
                             <label>Quantity:</label>
                             <input type="number" min="1" name="quantity" value="0" id="inputStock"/>
