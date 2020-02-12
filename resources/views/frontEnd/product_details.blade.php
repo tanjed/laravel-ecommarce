@@ -67,7 +67,8 @@
                         <span>
                             <span id="dynamic_price">US ${{$detail_product->price}}</span>
                             <label>Quantity:</label>
-                            <input type="number" min="1" name="quantity" value="0" id="inputStock"/>
+                            <input type="number" min="1" name="quantity" value="1" />
+{{--                            id="inputStock"--}}
                             @if($totalStock>0)
                             <button type="submit" class="btn btn-fefault cart" id="buttonAddToCart">
                                 <i class="fa fa-shopping-cart"></i>
@@ -222,7 +223,7 @@
                                                 <img src="{{url('/products/small',$item['products']['image'])}}" alt="" style="width: 150px;"/>
                                                 <h2>{{$item['products']['price']}}</h2>
                                                 <p>{{$item['products']['p_name']}}</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                                <a href="{{url('/product-detail',$item['product_id'])}}" class="btn btn-default add-to-cart">View Product</a>
                                             </div>
                                         </div>
 

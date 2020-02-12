@@ -20,7 +20,7 @@ class IndexController extends Controller
             }])
             ->orderBy('hit', 'desc')
             ->orderBy('avg_reviews', 'desc')
-            ->limit(5)
+            ->limit(6)
             ->get();
 
         $products=Products_model::all();

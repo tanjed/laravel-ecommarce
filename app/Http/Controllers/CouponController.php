@@ -122,7 +122,7 @@ class CouponController extends Controller
         if($check_coupon==0){
             return back()->with('message_coupon','Your Coupon Code Not Exist!');
         }else if($check_coupon==1){
-            $check_status=Coupon_model::where('status',1)->first();
+            $check_status=Coupon_model::where('status',1)->where('coupon_code',$coupon_code)->first();
             if($check_status->status==0){
                 return back()->with('message_coupon','Your Coupon was Disabled!');
             }else{
